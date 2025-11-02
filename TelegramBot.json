@@ -44,6 +44,8 @@
         "rules": {
           "values": [
             {
+              "renameOutput": true,
+              "outputKey": "start-command",
               "conditions": {
                 "options": {
                   "caseSensitive": true,
@@ -53,7 +55,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.message.text }}",
+                    "leftValue": "={{ ($json.text || '').trim() }}",
                     "rightValue": "/start",
                     "operator": {
                       "type": "string",
@@ -66,6 +68,8 @@
               }
             },
             {
+              "renameOutput": true,
+              "outputKey": "hola",
               "conditions": {
                 "options": {
                   "caseSensitive": true,
@@ -76,7 +80,7 @@
                 "conditions": [
                   {
                     "id": "f0d71f64-d0ab-47e1-8f07-145d9af2996e",
-                    "leftValue": "={{ ($json.message?.text || $json.chat?.text || '').trim().toLowerCase() }}",
+                    "leftValue": "={{ ($json.text || '').trim().toLowerCase() }}",
                     "rightValue": "hola",
                     "operator": {
                       "type": "string",
@@ -99,7 +103,7 @@
                 "conditions": [
                   {
                     "id": "953b18e8-e68c-4d91-b131-ea94ee913223",
-                    "leftValue": "={{ $json.message.text }}",
+                    "leftValue": "={{ $json.text }}",
                     "rightValue": "hola",
                     "operator": {
                       "type": "string",
@@ -124,7 +128,7 @@
                 "conditions": [
                   {
                     "id": "cfdfc08f-c1b7-428f-a5df-0e47b99b3be6",
-                    "leftValue": "={{ $json.message.photo }}",
+                    "leftValue": "={{ $json.photo }}",
                     "rightValue": "",
                     "operator": {
                       "type": "array",
