@@ -11,10 +11,10 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -2432,
-        -368
+        -3808,
+        -512
       ],
-      "id": "1391b631-42c8-4e6e-b3cb-3b84b744e054",
+      "id": "e76db320-692e-4d1c-bcd9-4c6016cbe682",
       "name": "Telegram Trigger",
       "webhookId": "473a8821-8619-4a1f-8e1b-c25dbc06527e",
       "credentials": {
@@ -32,11 +32,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -608,
-        -656
+        32,
+        -800
       ],
       "typeVersion": 1,
-      "id": "3811707e-c2a8-4738-ae3a-65269561e909",
+      "id": "d013db55-eb9e-4740-bf0f-2a59342afe10",
       "name": "Sticky Note"
     },
     {
@@ -78,7 +78,7 @@
                 "conditions": [
                   {
                     "id": "f0d71f64-d0ab-47e1-8f07-145d9af2996e",
-                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "leftValue": "={{ ( $('Telegram Trigger').item.json?.message?.text ?? '' )\n    .toString()\n    .trim()\n    .toLowerCase() }}",
                     "rightValue": "hola",
                     "operator": {
                       "type": "string",
@@ -149,10 +149,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -1760,
-        -400
+        -3136,
+        -544
       ],
-      "id": "eec519f7-d3b5-4fc4-b178-c4ea279f82c1",
+      "id": "110032de-2533-4bb3-96b6-84c8f4f7e3c3",
       "name": "Switch"
     },
     {
@@ -166,10 +166,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -512,
-        -608
+        128,
+        -752
       ],
-      "id": "3dd77b55-f377-428c-bafe-1153886e142e",
+      "id": "db9ecaac-0366-498e-91e4-0a6e41ae8062",
       "name": "reply /start",
       "webhookId": "65b431c4-1ab6-442e-aee8-2bca6e55008c",
       "credentials": {
@@ -187,11 +187,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1568,
-        -432
+        -944,
+        -592
       ],
       "typeVersion": 1,
-      "id": "09072ef0-427b-4554-b4b5-781df7e66152",
+      "id": "fe051260-a567-446a-8751-4594b0a44c66",
       "name": "Sticky Note1"
     },
     {
@@ -202,10 +202,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1536,
-        -368
+        -896,
+        -512
       ],
-      "id": "492014c9-13d9-471f-ae4d-4ba53e40f6f8",
+      "id": "8ab0bf45-8423-4469-ad6d-0d6f6727c059",
       "name": "chatAction",
       "webhookId": "f70c97b8-cd1b-435c-a758-95942c3f6fad",
       "credentials": {
@@ -224,10 +224,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1312,
-        -368
+        -672,
+        -512
       ],
-      "id": "4f1dde92-4072-409e-b986-4038b5be847f",
+      "id": "8dcb3f1e-c091-4f05-9740-bf1b28bcc3ff",
       "name": "Edit Fields"
     },
     {
@@ -237,10 +237,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1088,
-        -368
+        -448,
+        -512
       ],
-      "id": "79909251-d3d6-43d6-ad0e-a098973126ae",
+      "id": "4ff5e33b-bc3e-4896-a388-e89e12c78078",
       "name": "Unir datos"
     },
     {
@@ -254,10 +254,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        -864,
-        -368
+        -224,
+        -608
       ],
-      "id": "37603261-25ff-4228-9d24-1045009d9369",
+      "id": "3fcd8309-09ca-4f94-9d18-fe0d2e609229",
       "name": "AI Agent"
     },
     {
@@ -272,10 +272,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -880,
-        -160
+        -224,
+        -384
       ],
-      "id": "fc37b254-7017-4262-b34f-6146f06e0193",
+      "id": "6f1bf61d-eed0-407d-b1a0-ed9132dc9151",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -292,10 +292,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -784,
-        -160
+        -96,
+        -384
       ],
-      "id": "39d3b0d4-6021-40e7-b6cf-dea898126c87",
+      "id": "33e003bd-3cd9-49f3-b71e-aed470115b28",
       "name": "Simple Memory"
     },
     {
@@ -309,10 +309,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -512,
-        -368
+        128,
+        -512
       ],
-      "id": "d6175132-41cb-4926-8dd7-0aa23dbfe9c0",
+      "id": "dacc1f4c-1c29-4d3f-896d-85e5984e9e35",
       "name": "Send a text message",
       "webhookId": "7a931c99-91cf-417b-8816-a8524208f0a8",
       "credentials": {
@@ -326,15 +326,15 @@
       "parameters": {
         "content": "## Envio de Imagen \n",
         "height": 272,
-        "width": 1024
+        "width": 1184
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1584,
-        16
+        -3040,
+        -176
       ],
       "typeVersion": 1,
-      "id": "8d9be290-ddd4-48bc-8a88-b5766980fa15",
+      "id": "514593b9-bc1a-4973-abdc-09bcf16a4e0e",
       "name": "Sticky Note2"
     },
     {
@@ -345,10 +345,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1536,
-        64
+        -2912,
+        -64
       ],
-      "id": "bf7bdfd4-5e67-4db6-ba0f-e7340b35679e",
+      "id": "a02df054-41fa-4729-a977-066ec736eaf9",
       "name": "writing",
       "webhookId": "f70c97b8-cd1b-435c-a758-95942c3f6fad",
       "credentials": {
@@ -365,10 +365,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1312,
-        64
+        -2688,
+        -64
       ],
-      "id": "0c48b59b-23e6-46ea-867a-429e775d2fe8",
+      "id": "9a421268-5748-4542-843e-a528f11e3956",
       "name": "foto con mayor resolucion"
     },
     {
@@ -380,10 +380,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -1088,
-        64
+        -2464,
+        -64
       ],
-      "id": "e04bdedf-0756-4007-96f1-c18cca698e01",
+      "id": "a77283e1-1ca3-4f00-b671-ac15e56ee62b",
       "name": "Get a file",
       "webhookId": "fac3f1d1-bcc5-4380-88a1-c442ba26d223",
       "credentials": {
@@ -403,17 +403,17 @@
           "mode": "list",
           "cachedResultName": "GPT-4O"
         },
-        "text": "={{ $('Telegram Trigger').item.json.message.caption || 'Que hay en la imagen?' }}\n\n",
+        "text": "=Eres un validador de comprobantes bancarios ecuatorianos. Analiza la imagen adjunta y:\n\nClasifica el banco solo entre estas opciones (IDs fijos):\n\n2 Banco Pichincha (acepta también “Banco Pichicha” como sinónimo tipográfico de Pichincha)\n\n3 Banco del Pacifico\n\n4 Banco Guayaquil\n\n1 No Identificado (cualquier otro caso o si hay ambigüedad)\n\nExtrae campos del comprobante si pertenecen con claridad a una de las opciones 2, 3 o 4.\n\namount (texto tal como aparece, incluyendo símbolo y separadores)\n\namount_value (número normalizado en formato decimal punto, sin símbolos, ej. 5000.75)\n\ndate_text (tal como aparece en el comprobante)\n\ndate_iso (fecha normalizada YYYY-MM-DD; interpreta meses en español: ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic)\n\norigin_account (número de cuenta de origen; si está enmascarado, devuelve exactamente lo visible, p. ej. ****9100)\n\nReglas de decisión\n\nSi el texto o logotipo indican inequívocamente un único banco, usa su id.\n\nTrata “Banco Pichicha”, “Pichicha”, “BPichicha” como Banco Pichincha (id=2).\n\nSi hay varios bancos o no es comprobante/borroso/ambiguo → bank_id = 1 y los demás campos vacíos.\n\nSi no encuentras un campo requerido, deja cadena vacía \"\".\n\nNormalización de monto\n\nAcepta $ 5.00, $5,000.75, USD 120,50, etc.\n\nConvierte a amount_value usando punto como separador decimal y sin millares (ej.: 5.00, 5000.75, 120.50).\n\nSi no es posible, deja amount_value vacío.\n\nSalida (estricta, una sola línea JSON)\nResponde solo con este JSON, sin texto adicional:\n\n{\n  \"bank_id\": <1|2|3|4>,\n  \"bank_name\": \"<Banco Pichincha|Banco del Pacifico|Banco Guayaquil|No Identificado>\",\n  \"amount\": \"<texto>\",\n  \"amount_value\": \"<decimal o ''>\",\n  \"date_text\": \"<texto>\",\n  \"date_iso\": \"<YYYY-MM-DD o ''>\",\n  \"origin_account\": \"<texto o ''>\"\n}\n\nEjemplos esperados\n\nSi ves “BANCO PICHINCHA” o “BANCO PICHICHA” y los datos:\n\n{\"bank_id\": 2, \"bank_name\": \"Banco Pichincha\", \"amount\": \"$ 5.00\", \"amount_value\": \"5.00\", \"date_text\": \"27 oct 2025\", \"date_iso\": \"2025-10-27\", \"origin_account\": \"2202497584\"}\n\n\nSi no corresponde a ninguno o es ambiguo:\n\n{\"bank_id\": 1, \"bank_name\": \"No Identificado\", \"amount\": \"\", \"amount_value\": \"\", \"date_text\": \"\", \"date_iso\": \"\", \"origin_account\": \"\"}\n",
         "inputType": "base64",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -816,
-        64
+        -2240,
+        -64
       ],
-      "id": "68fa5617-b413-41f8-80fa-24bad4bab231",
+      "id": "9585f58a-0298-4b0c-8346-d5e8924978c7",
       "name": "Analyze image",
       "credentials": {
         "openAiApi": {
@@ -425,7 +425,7 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "={{ $json.content }}",
+        "text": "={{ $json.message.content }}",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -433,10 +433,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -512,
-        64
+        128,
+        -96
       ],
-      "id": "96a07cae-77be-43b6-a2a8-2b3b082d41fe",
+      "id": "c92e8f97-1e39-4ce0-a792-ec87fee59e30",
       "name": "Send a text after image",
       "webhookId": "7a931c99-91cf-417b-8816-a8524208f0a8",
       "credentials": {
@@ -453,10 +453,10 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        -2208,
-        -368
+        -3584,
+        -512
       ],
-      "id": "b5e956aa-b0e2-4c53-be23-9c922db7e589",
+      "id": "f5e6f71b-42a7-4827-9bb6-cc3c8c917fce",
       "name": "Date & Time"
     },
     {
@@ -468,10 +468,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -1984,
-        -368
+        -3360,
+        -512
       ],
-      "id": "4d550644-761a-40cf-bc76-ef67b542ac21",
+      "id": "53a0d115-017e-4073-92f0-c10488d32f40",
       "name": "Call chat.save_user_message",
       "credentials": {
         "postgres": {
@@ -490,10 +490,10 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.2,
       "position": [
-        -544,
-        352
+        -1344,
+        80
       ],
-      "id": "908eaca9-5da2-4492-81fd-bfd794132023",
+      "id": "31b8c174-8d7b-403b-b3cd-f8c73fd38824",
       "name": "guardarComprobante",
       "alwaysOutputData": false,
       "credentials": {
@@ -538,10 +538,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -816,
-        352
+        -1568,
+        80
       ],
-      "id": "6a84f633-4983-4b53-9bed-72bc4b51d1d7",
+      "id": "642dca46-1cf0-4750-afeb-9db77703fa15",
       "name": "editarCamposImagen"
     },
     {
@@ -553,15 +553,438 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        64,
-        -368
+        352,
+        -512
       ],
-      "id": "0c1f700b-2be8-48b6-86a3-068df9aea778",
+      "id": "9a00d8dc-1b35-447a-a38b-d64bd8ba40be",
       "name": "Call chat.save_bot_response",
       "credentials": {
         "postgres": {
           "id": "gJnhaqeZETxFLnvw",
           "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code node (JavaScript)\nconst items = $input.all();\nconst out = [];\n\nfor (const item of items) {\n  const content = (item.json?.content ?? '').toString();\n\n  // 1) Intenta capturar JSON dentro de bloque ```json ... ```\n  const fenced = content.match(/```(?:json)?\\s*([\\s\\S]*?)\\s*```/i);\n  let jsonText = fenced ? fenced[1] : content;\n\n  // 2) Parse robusto\n  let parsed;\n  try {\n    parsed = JSON.parse(jsonText);\n  } catch {\n    // fallback: busca el primer {...} dentro del texto\n    const m = jsonText.match(/\\{[\\s\\S]*\\}/);\n    parsed = m ? JSON.parse(m[0]) : {};\n  }\n\n  // 3) Normaliza/asegura campos\n  const normalized = {\n    bank_id: parsed.bank_id != null ? Number(parsed.bank_id) : null,\n    bank_name: parsed.bank_name ?? '',\n    amount: parsed.amount ?? '',\n    amount_value: parsed.amount_value ?? '',\n    date_text: parsed.date_text ?? '',\n    date_iso: parsed.date_iso ?? '',\n    origin_account: parsed.origin_account ?? '',\n  };\n\n  out.push({ json: normalized });\n}\n\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2016,
+        -64
+      ],
+      "id": "9d5e1bb8-a101-4a8f-be8e-97a7af95b6d0",
+      "name": "formateaJsonTransaction"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "value": "chat",
+          "mode": "list",
+          "cachedResultName": "chat"
+        },
+        "table": {
+          "__rl": true,
+          "value": "vounchers",
+          "mode": "list",
+          "cachedResultName": "vounchers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ Number($json.id) }}",
+            "bank_id": "={{ $json.bank_update_id }}",
+            "amount": "={{ Number($json.amount_value) }}",
+            "vouncher_date": "={{ $json.date_iso }}",
+            "origin_account": "={{ $json.origin_account_update }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "message_id",
+              "displayName": "message_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "bank_id",
+              "displayName": "bank_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "vouncher_number",
+              "displayName": "vouncher_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "amount",
+              "displayName": "amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "vouncher_date",
+              "displayName": "vouncher_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "origin_account",
+              "displayName": "origin_account",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "uuid",
+              "displayName": "uuid",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -448,
+        16
+      ],
+      "id": "fa67646f-19b8-42bc-80f0-94418ef27ce9",
+      "name": "updateVouncher",
+      "credentials": {
+        "postgres": {
+          "id": "gJnhaqeZETxFLnvw",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "chat",
+          "mode": "list",
+          "cachedResultName": "chat"
+        },
+        "table": {
+          "__rl": true,
+          "value": "vounchers",
+          "mode": "list",
+          "cachedResultName": "vounchers"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message_id": "={{ $json.id }}",
+            "uuid": "={{ $('guardarComprobante').item.json._id }}",
+            "vouncher_date": "={{ $('Date & Time').item.json.currentDate }}",
+            "bank_id": 1
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "message_id",
+              "displayName": "message_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "bank_id",
+              "displayName": "bank_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "vouncher_number",
+              "displayName": "vouncher_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "amount",
+              "displayName": "amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "vouncher_date",
+              "displayName": "vouncher_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "origin_account",
+              "displayName": "origin_account",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "uuid",
+              "displayName": "uuid",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -896,
+        80
+      ],
+      "id": "871205f7-1c1c-4c21-8686-5621c1b564ef",
+      "name": "insertarVouncher",
+      "credentials": {
+        "postgres": {
+          "id": "gJnhaqeZETxFLnvw",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "chat",
+          "mode": "list",
+          "cachedResultName": "chat"
+        },
+        "table": {
+          "__rl": true,
+          "value": "messages",
+          "mode": "list",
+          "cachedResultName": "messages"
+        },
+        "limit": 1,
+        "where": {
+          "values": [
+            {
+              "column": "telegram_message_id",
+              "value": "={{ $('Telegram Trigger').item.json.message.message_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1120,
+        80
+      ],
+      "id": "eeae903e-6331-42fc-8ed7-6186f2246390",
+      "name": "selectMessagesById",
+      "credentials": {
+        "postgres": {
+          "id": "gJnhaqeZETxFLnvw",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e0098c4c-6652-446f-a671-666806c3bbf7",
+              "leftValue": "={{ $json.bank_id }}",
+              "rightValue": 2,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "1b7bddc1-42f7-4d09-aac4-85e571b60577",
+              "leftValue": "={{ $json.bank_id }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1792,
+        -64
+      ],
+      "id": "c14e3d30-232b-419b-b1ee-85193a5f6331",
+      "name": "If BancoValidado"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        -672,
+        16
+      ],
+      "id": "5b13f7de-a6e4-4fed-97e3-37fb9433ffd3",
+      "name": "mergeVoucherData"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Responde Satisfactoriamente que su pedido va a ser validado"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -224,
+        16
+      ],
+      "id": "d86898ac-75c7-4a93-8ae0-6d3db4cbe151",
+      "name": "transferenciaConfirmada",
+      "credentials": {
+        "openAiApi": {
+          "id": "mJwjRiZu5Di4U0PT",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Solo indicar que debe subir un comprobannte valido en 2 intentos fallidos su cuenta sera bloqueada, cualquier otra respuesta no esta permitida"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -224,
+        -208
+      ],
+      "id": "be7646b6-729a-44d6-a1ca-8b4d80a1ead5",
+      "name": "transacionNegada",
+      "credentials": {
+        "openAiApi": {
+          "id": "mJwjRiZu5Di4U0PT",
+          "name": "OpenAi account"
         }
       }
     }
@@ -706,11 +1129,6 @@
             "node": "Analyze image",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "editarCamposImagen",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -719,7 +1137,7 @@
       "main": [
         [
           {
-            "node": "Send a text after image",
+            "node": "formateaJsonTransaction",
             "type": "main",
             "index": 0
           }
@@ -791,13 +1209,124 @@
           }
         ]
       ]
+    },
+    "guardarComprobante": {
+      "main": [
+        [
+          {
+            "node": "selectMessagesById",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "formateaJsonTransaction": {
+      "main": [
+        [
+          {
+            "node": "If BancoValidado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "insertarVouncher": {
+      "main": [
+        [
+          {
+            "node": "mergeVoucherData",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "selectMessagesById": {
+      "main": [
+        [
+          {
+            "node": "insertarVouncher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "updateVouncher": {
+      "main": [
+        [
+          {
+            "node": "transferenciaConfirmada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If BancoValidado": {
+      "main": [
+        [
+          {
+            "node": "editarCamposImagen",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "mergeVoucherData",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "transacionNegada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mergeVoucherData": {
+      "main": [
+        [
+          {
+            "node": "updateVouncher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferenciaConfirmada": {
+      "main": [
+        [
+          {
+            "node": "Send a text after image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transacionNegada": {
+      "main": [
+        [
+          {
+            "node": "Send a text after image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "b837f62a-ba43-4696-9335-3e65838a0d61",
+  "versionId": "1a4157bf-0dfd-474f-a599-5f2a9b059cbc",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "f36c64b13bbb7748bd9d1fa29e9a2d15f3b8329608b51a4e86db824070316d3e"

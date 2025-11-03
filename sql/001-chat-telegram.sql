@@ -39,7 +39,7 @@ CREATE INDEX chat_messages_conversation_idx
 CREATE TABLE chat.banks (
     id BIGSERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
-    exampleVouncher UUID
+    exampleVouncher TEXT
 );
 
 CREATE TABLE chat.vounchers (
@@ -50,7 +50,7 @@ CREATE TABLE chat.vounchers (
     amount NUMERIC(12, 2),
     vouncher_date TIMESTAMPTZ,
     origin_account TEXT,
-    uuid UUID NOT NULL
+    uuid TEXT NOT NULL
 );
 
 CREATE OR REPLACE FUNCTION chat.touch_users_updated_at()
