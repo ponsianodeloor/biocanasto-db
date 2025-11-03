@@ -1,6 +1,8 @@
 -- Minimal Telegram conversational storage
 CREATE SCHEMA IF NOT EXISTS chat;
 
+DROP TABLE IF EXISTS chat.vounchers;
+DROP TABLE IF EXISTS chat.banks;
 DROP TABLE IF EXISTS chat.messages;
 DROP TABLE IF EXISTS chat.users;
 
@@ -33,6 +35,23 @@ CREATE TABLE chat.messages (
 
 CREATE INDEX chat_messages_conversation_idx
     ON chat.messages (conversation_user_id, message_date DESC);
+
+CREATE TABLE chat.banks (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    exampleVouncher UUID
+);
+
+CREATE TABLE chat.vounchers (
+    id BIGSERIAL PRIMARY KEY,
+    message_id BIGINT NOT NULL REFERENCES chat.messages(id) ON DELETE CASCADE,
+    bank_id BIGINT REFERENCES chat.banks(id),
+    vouncherNumber TEXT,
+    amount NUMERIC(12, 2),
+    date TIMESTAMPTZ,
+    originAccount TEXT,
+    uuid UUID NOT NULL
+);
 
 CREATE OR REPLACE FUNCTION chat.touch_users_updated_at()
 RETURNS TRIGGER

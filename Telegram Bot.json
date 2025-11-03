@@ -482,27 +482,6 @@
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "CALL chat.save_bot_response(\n    {{ $('Telegram Trigger').item.json.message.from.id }},\n    '{{ $json.result.chat.first_name }}',\n    '{{ $json.result.chat.last_name }}',\n    '{{ $json.result.chat.username }}',\n    {{ $json.result.from.id }},\n    '{{ $json.result.from.first_name }}',\n    NULL,\n    '{{ $json.result.from.username }}',\n    {{ $('Telegram Trigger').item.json.message.chat.id }},\n    {{ $json.result.message_id }},\n    {{ $('Telegram Trigger').item.json.message.message_id }},\n    '{{ $('Date & Time').item.json.currentDate }}',\n    '{{ $json.result.text }}',\n    '{{ JSON.stringify($json.result) }}'::jsonb\n);",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        64,
-        -368
-      ],
-      "id": "0c1f700b-2be8-48b6-86a3-068df9aea778",
-      "name": "Call cha.save_bot_response",
-      "credentials": {
-        "postgres": {
-          "id": "gJnhaqeZETxFLnvw",
-          "name": "Postgres account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "insert",
         "collection": "filesUpload",
         "fields": "fecha_subida, nombre, tamano, tipo",
@@ -564,6 +543,27 @@
       ],
       "id": "6a84f633-4983-4b53-9bed-72bc4b51d1d7",
       "name": "editarCamposImagen"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CALL chat.save_bot_response(\n    {{ $('Telegram Trigger').item.json.message.from.id }},\n    '{{ $json.result.chat.first_name }}',\n    '{{ $json.result.chat.last_name }}',\n    '{{ $json.result.chat.username }}',\n    {{ $json.result.from.id }},\n    '{{ $json.result.from.first_name }}',\n    NULL,\n    '{{ $json.result.from.username }}',\n    {{ $('Telegram Trigger').item.json.message.chat.id }},\n    {{ $json.result.message_id }},\n    {{ $('Telegram Trigger').item.json.message.message_id }},\n    '{{ $('Date & Time').item.json.currentDate }}',\n    '{{ $json.result.text }}',\n    '{{ JSON.stringify($json.result) }}'::jsonb\n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        64,
+        -368
+      ],
+      "id": "0c1f700b-2be8-48b6-86a3-068df9aea778",
+      "name": "Call chat.save_bot_response",
+      "credentials": {
+        "postgres": {
+          "id": "gJnhaqeZETxFLnvw",
+          "name": "Postgres account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -741,7 +741,7 @@
       "main": [
         [
           {
-            "node": "Call cha.save_bot_response",
+            "node": "Call chat.save_bot_response",
             "type": "main",
             "index": 0
           }
@@ -752,7 +752,7 @@
       "main": [
         [
           {
-            "node": "Call cha.save_bot_response",
+            "node": "Call chat.save_bot_response",
             "type": "main",
             "index": 0
           }
@@ -763,7 +763,7 @@
       "main": [
         [
           {
-            "node": "Call cha.save_bot_response",
+            "node": "Call chat.save_bot_response",
             "type": "main",
             "index": 0
           }
@@ -797,7 +797,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "6f07e88a-8ddf-4f98-b4d0-d1c6c874c3e5",
+  "versionId": "b837f62a-ba43-4696-9335-3e65838a0d61",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "f36c64b13bbb7748bd9d1fa29e9a2d15f3b8329608b51a4e86db824070316d3e"
