@@ -46,10 +46,10 @@ CREATE TABLE chat.vounchers (
     id BIGSERIAL PRIMARY KEY,
     message_id BIGINT NOT NULL REFERENCES chat.messages(id) ON DELETE CASCADE,
     bank_id BIGINT REFERENCES chat.banks(id),
-    vouncherNumber TEXT,
+    vouncher_number TEXT,
     amount NUMERIC(12, 2),
-    date TIMESTAMPTZ,
-    originAccount TEXT,
+    vouncher_date TIMESTAMPTZ,
+    origin_account TEXT,
     uuid UUID NOT NULL
 );
 
