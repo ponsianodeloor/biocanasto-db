@@ -70,8 +70,8 @@ EXECUTE FUNCTION catalog.touch_products_updated_at();
 INSERT INTO catalog.product_kinds (code, name, description, is_service)
 VALUES
     ('SERVICE', 'Servicio', 'Intangible services such as delivery or subscription plans.', TRUE),
-    ('VEGETAL', 'Vegetales', 'Hortalizas frescas ofrecidas en el mercado.', FALSE),
-    ('FRUTA', 'Frutas', 'Frutas estacionales o importadas listas para su venta.', FALSE)
+    ('VEGETABLE', 'Vegetales', 'Hortalizas frescas ofrecidas en el mercado.', FALSE),
+    ('FRUIT', 'Frutas', 'Frutas estacionales o importadas listas para su venta.', FALSE)
 ON CONFLICT (code) DO NOTHING;
 
 INSERT INTO catalog.sale_types (code, name, unit_label)
