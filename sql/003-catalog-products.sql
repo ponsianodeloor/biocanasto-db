@@ -79,3 +79,26 @@ VALUES
     ('POUND', 'Por libra', 'lb'),
     ('UNIT', 'Por Unidad', 'c/u.')
 ON CONFLICT (code) DO NOTHING;
+
+-- Vista que relaciona productos disponibles con sus catálogos.
+CREATE OR REPLACE VIEW catalog.available_product_catalog AS
+SELECT
+    p.id AS product_id,
+    p.external_code,
+    p.name AS product_name,
+    p.description,
+    p.price,
+    p.available_quantity,
+
+    pk.name AS product_kind_name,
+    pk.description AS product_kind_description,
+    pk.is_service,
+
+    st.name AS sale_type_name,
+    st.unit_label,
+    p.created_at,
+    p.updated_at
+FROM catalog.products p
+JOIN catalog.product_kinds pk ON pk.id = p.product_kind_id
+JOIN catalog.sale_types st ON st.id = p.sale_type_id
+WHERE p.available = TRUE;
