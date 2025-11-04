@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS catalog.product_movements (
     new_quantity NUMERIC(12, 2) NOT NULL,
     previous_price NUMERIC(12, 2) NOT NULL,
     new_price NUMERIC(12, 2) NOT NULL,
+    performed_by TEXT NOT NULL,
     note TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -23,6 +24,7 @@ CREATE OR REPLACE PROCEDURE catalog.adjust_product_inventory(
     p_external_code TEXT,
     p_quantity_delta NUMERIC,
     p_new_price NUMERIC,
+    p_performed_by TEXT,
     p_note TEXT DEFAULT NULL
 )
 LANGUAGE plpgsql
@@ -38,6 +40,10 @@ DECLARE
 BEGIN
     IF p_external_code IS NULL OR trim(p_external_code) = '' THEN
         RAISE EXCEPTION 'El código externo del producto no puede ser nulo.';
+    END IF;
+
+    IF p_performed_by IS NULL OR trim(p_performed_by) = '' THEN
+        RAISE EXCEPTION 'El usuario responsable es obligatorio.';
     END IF;
 
     IF p_quantity_delta IS NULL THEN
@@ -89,6 +95,7 @@ BEGIN
         new_quantity,
         previous_price,
         new_price,
+        performed_by,
         note
     ) VALUES (
         v_product_id,
@@ -99,6 +106,7 @@ BEGIN
         v_new_quantity,
         v_current_price,
         v_new_price,
+        p_performed_by,
         p_note
     );
 END;
