@@ -32,7 +32,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        32,
+        256,
         -800
       ],
       "typeVersion": 1,
@@ -158,7 +158,7 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "¡Hola, soy BioCanastoChatBot 🧺🌱!\nPide frutas y verduras frescas 🍎🥦, paga seguro y recibe hoy en casa. Usamos fundas y cajas biodegradables para cuidar el planeta 🌎💚.\n\nCómo funciona\n\nPregunta disponibilidad: “¿Qué frutas y verduras tienen hoy?”\n\nElige cantidades: por kg, 1/2 kg o por unidades.\n\nConfirma tu pedido y dinos a qué banco vas a transferir:\nPichincha, Guayaquil, Pacífico o Cooperativa JEP.\n\nNota: no se aceptan otros bancos.\n\nSube el comprobante (captura) con el número de transacción.\n\nEjemplo rápido\n\n“Quiero 2 kg de manzana, 1/2 kg de espinaca y 6 plátanos.”\n\n“Transferiré a Banco Pichincha.”\n\n“Adjunto comprobante: TRX-123456.”\n\n¿List@ para comenzar? Escribe “Ver disponibles” y armamos tu canasta 🍌🥬🧺.",
+        "text": "¡Hola, soy BioCanastoChatBot 🧺🌱!\nPide frutas y verduras frescas 🍎🥦, paga seguro y recibe hoy en casa. Usamos fundas y cajas biodegradables para cuidar el planeta 🌎💚.\n\nCómo funciona\n\n1.- Pregunta disponibilidad: “¿Qué frutas y verduras tienen hoy?”\n\n2.- Elige cantidades: por libras, o por unidades.\n\n3.- Confirma tu pedido y dinos a desde banco vas a transferir:\nPichincha, Guayaquil, Pacífico.\n\nNota: no se aceptan otros bancos.\n\nSube el comprobante (captura) con el número de transacción.\n\nEjemplo rápido:\n\n“Quiero 2 manzanas, 1 de espinaca y 6 plátanos.”\n\nNuestro agente clasificara las unidades y libras por ti\n\n\"Quiero Finalizar Pedido\"\n\nFinalmente\n“Adjunto comprobante: TRX-123456. con la captura”\n\n¿List@ para comenzar? Escribe “Ver productos disponibles” y armamos tu canasta 🍌🥬🧺.",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -166,7 +166,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        128,
+        352,
         -752
       ],
       "id": "db9ecaac-0366-498e-91e4-0a6e41ae8062",
@@ -248,14 +248,14 @@
         "promptType": "define",
         "text": "={{ $('Telegram Trigger').item.json.message.text }}",
         "options": {
-          "systemMessage": "Actúa como vendedor de frutas y verduras frescas para delivery. Tono cercano, respuestas breves, sin inventar datos. Tareas: mostrar catálogo, recomendar cantidades, armar carrito, calcular total, pedir dirección/horario/pago, confirmar pedido. Enfatiza empaques biodegradables y cero plásticos. Maneja faltantes con sustitutos. Moneda {{CURRENCY}}.\nUtiliza la herramienta sendMessageToClient para responder todos los mensajes"
+          "systemMessage": "Rol:\nActúas como vendedor de frutas y verduras frescas para delivery. Tono cercano y amable. Moneda: USD. Enfatiza siempre empaques biodegradables y cero plásticos. Prohibido usar emojis.\n\nHerramientas obligatorias:\n\nproductosDisponibles: consulta el catálogo y existencias.\n\nsendMessageToClient: única forma válida de responder al cliente (todas las salidas deben usar esta herramienta).\n\nEsquema de datos de productosDisponibles (usar estrictamente estas columnas):\n\nexternal_code: identificador público del ítem. Úsalo para agregar/quitar en el carrito y en confirmaciones.\n\nproduct_name: nombre comercial del alimento.\n\ndescription: detalle breve (variedad, tamaño, origen, etc.).\n\nprice: precio unitario en USD.\n\navailable_quantity: stock disponible (numérico).\n\nproduct_kind_name: tipo de alimento; valores esperados: Vegetales o Frutas.\n\nsale_type_name: tipo de venta; valores esperados: Libras o Unidad.\n\nunit_label: etiqueta corta de unidad para mostrar al cliente; valores típicos: lb o c/u.\n\nReglas de uso de herramientas:\n\nNunca inventes datos.\n\nCuando el cliente escriba “Ver productos disponibles”, “Ver catálogo” o variantes, SIEMPRE llama a productosDisponibles y muestra todo lo retornado sin acortar la lista.\n\nAntes de recomendar cantidades, armar carrito, confirmar pedido o calcular total, verifica stock llamando a productosDisponibles si no hay datos vigentes.\n\nTodas las respuestas al cliente deben enviarse vía sendMessageToClient.\n\nCómo mostrar el catálogo (formato sugerido por ítem):\n\nPrecio: USD price (unit_label) | Stock: available_quantity\n\nNo resumas ni cortes. Muestra todos los ítems devueltos.\n\nCarrito y cálculos:\n\nAl agregar ítems, exige o infiere cantidad en función de sale_type_name:\n\nSi sale_type_name = Libras → cantidades decimales permitidas (ej. 1.5).\n\nSi sale_type_name = Unidad → cantidades enteras.\n\nValida contra available_quantity. Si excede, sugiere el máximo disponible.\n\nSubtotal por ítem = price * cantidad. Total = suma de subtotales.\n\nFormatea siempre precios en USD con dos decimales.\n\nTareas principales:\n\nRecomendar cantidades adecuadas según personas/uso semanal.\n\nArmar y editar carrito: agregar/quitar/cambiar, mostrar subtotales y total.\n\nConfirmar pedido: resumen claro con [external_code] product_name, cantidad con unit_label, precio, total.\n\nPago: pedir captura/foto del pago de los bancos Pichincha, Pacífico o Guayaquil. Aclara que cualquier otro comprobante será rechazado.\n\nUbicación: después de pedir el pago, solicitar ubicación exacta o enlace de Google Maps.\n\nRecordar empaques biodegradables y cero plásticos en el cierre.\n\nEstilo y redacción:\n\nUsa términos frutas, verduras, o el nombre del alimento (evita “productos”).\n\nClaro, breve y conversacional. Sin emojis.\n\nFlujo conversacional recomendado:\n\nSaludo breve y propuesta de ayuda.\n\nSi piden ver catálogo → productosDisponibles → listar todo sin cortar usando el formato indicado.\n\nSondeo: comidas previstas, número de personas, preferencias → recomendar cantidades.\n\nCarrito: agregar/quitar/actualizar → mostrar subtotal y total (USD).\n\nConfirmación: resumen final + total.\n\nPago: solicitar captura de transferencia (Pichincha/Pacífico/Guayaquil) y advertir rechazo de otros comprobantes.\n\nUbicación: pedir dirección exacta o link de Google Maps.\n\nCierre: tiempo estimado y recordatorio de empaques biodegradables y cero plásticos.\n\nComandos/Intenciones a reconocer:\n\nVer catálogo/lista completa → productosDisponibles y mostrar todo con el formato.\n\nAgregar/quitar/cambiar + [external_code] o product_name + cantidad.\n\nRecomendaciones por número de personas/semana.\n\nConfirmar pedido → resumen y total.\n\nPagar/comprobante → pedir captura de bancos válidos.\n\nUbicación/enviar dirección → pedir dirección o link de Maps.\n\nCancelar → vaciar carrito y confirmar.\n\nAyuda → explicar brevemente cómo pedir.\n\nValidaciones clave:\n\nBanco distinto a Pichincha/Pacífico/Guayaquil → rechazar y reiterar política.\n\nÍtem no presente en la respuesta de productosDisponibles → informar no disponible y sugerir alternativas del catálogo vigente.\n\nRecalcular total si cambian cantidades.\n\nPrecios siempre en USD con dos decimales.\n\nFormato de salida:\n\nSiempre responde usando sendMessageToClient.\n\nAl listar el catálogo, no resumas ni cortes: muestra todo lo devuelto por productosDisponibles.\n\nNo incluyas trazas técnicas; solo contenido conversacional para el cliente.\n\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
         -224,
-        -608
+        -512
       ],
       "id": "3fcd8309-09ca-4f94-9d18-fe0d2e609229",
       "name": "AI Agent"
@@ -273,7 +273,7 @@
       "typeVersion": 1.2,
       "position": [
         -224,
-        -384
+        -288
       ],
       "id": "6f1bf61d-eed0-407d-b1a0-ed9132dc9151",
       "name": "OpenAI Chat Model",
@@ -292,8 +292,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -96,
-        -384
+        -128,
+        -288
       ],
       "id": "33e003bd-3cd9-49f3-b71e-aed470115b28",
       "name": "Simple Memory"
@@ -301,15 +301,16 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "={{ $json.output }}",
+        "text": "={{ $json.text }}",
         "additionalFields": {
-          "appendAttribution": false
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
         }
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        128,
+        608,
         -512
       ],
       "id": "dacc1f4c-1c29-4d3f-896d-85e5984e9e35",
@@ -331,7 +332,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -3040,
-        -176
+        -16
       ],
       "typeVersion": 1,
       "id": "514593b9-bc1a-4973-abdc-09bcf16a4e0e",
@@ -346,7 +347,7 @@
       "typeVersion": 1.2,
       "position": [
         -2912,
-        -64
+        96
       ],
       "id": "a02df054-41fa-4729-a977-066ec736eaf9",
       "name": "writing",
@@ -366,7 +367,7 @@
       "typeVersion": 2,
       "position": [
         -2688,
-        -64
+        96
       ],
       "id": "9a421268-5748-4542-843e-a528f11e3956",
       "name": "foto con mayor resolucion"
@@ -381,7 +382,7 @@
       "typeVersion": 1.2,
       "position": [
         -2464,
-        -64
+        96
       ],
       "id": "a77283e1-1ca3-4f00-b671-ac15e56ee62b",
       "name": "Get a file",
@@ -411,7 +412,7 @@
       "typeVersion": 1.8,
       "position": [
         -2240,
-        -64
+        96
       ],
       "id": "9585f58a-0298-4b0c-8346-d5e8924978c7",
       "name": "Analyze image",
@@ -433,8 +434,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        128,
-        -96
+        352,
+        64
       ],
       "id": "c92e8f97-1e39-4ce0-a792-ec87fee59e30",
       "name": "Send a text after image",
@@ -491,7 +492,7 @@
       "typeVersion": 1.2,
       "position": [
         -1344,
-        80
+        240
       ],
       "id": "31b8c174-8d7b-403b-b3cd-f8c73fd38824",
       "name": "guardarComprobante",
@@ -539,7 +540,7 @@
       "typeVersion": 3.4,
       "position": [
         -1568,
-        80
+        240
       ],
       "id": "642dca46-1cf0-4750-afeb-9db77703fa15",
       "name": "editarCamposImagen"
@@ -553,7 +554,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        352,
+        992,
         -512
       ],
       "id": "9a00d8dc-1b35-447a-a38b-d64bd8ba40be",
@@ -573,7 +574,7 @@
       "typeVersion": 2,
       "position": [
         -2016,
-        -64
+        96
       ],
       "id": "9d5e1bb8-a101-4a8f-be8e-97a7af95b6d0",
       "name": "formateaJsonTransaction"
@@ -692,7 +693,7 @@
       "typeVersion": 2.6,
       "position": [
         -448,
-        16
+        176
       ],
       "id": "fa67646f-19b8-42bc-80f0-94418ef27ce9",
       "name": "updateVouncher",
@@ -815,7 +816,7 @@
       "typeVersion": 2.6,
       "position": [
         -896,
-        80
+        240
       ],
       "id": "871205f7-1c1c-4c21-8686-5621c1b564ef",
       "name": "insertarVouncher",
@@ -856,7 +857,7 @@
       "typeVersion": 2.6,
       "position": [
         -1120,
-        80
+        240
       ],
       "id": "eeae903e-6331-42fc-8ed7-6186f2246390",
       "name": "selectMessagesById",
@@ -904,7 +905,7 @@
       "typeVersion": 2.2,
       "position": [
         -1792,
-        -64
+        96
       ],
       "id": "c14e3d30-232b-419b-b1ee-85193a5f6331",
       "name": "If BancoValidado"
@@ -919,7 +920,7 @@
       "typeVersion": 2,
       "position": [
         -672,
-        16
+        176
       ],
       "id": "5b13f7de-a6e4-4fed-97e3-37fb9433ffd3",
       "name": "mergeVoucherData"
@@ -945,7 +946,7 @@
       "typeVersion": 1.8,
       "position": [
         -224,
-        16
+        176
       ],
       "id": "d86898ac-75c7-4a93-8ae0-6d3db4cbe151",
       "name": "transferenciaConfirmada",
@@ -977,7 +978,7 @@
       "typeVersion": 1.8,
       "position": [
         -224,
-        -208
+        -48
       ],
       "id": "be7646b6-729a-44d6-a1ca-8b4d80a1ead5",
       "name": "transacionNegada",
@@ -987,6 +988,52 @@
           "name": "OpenAi account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "catalog",
+          "mode": "list",
+          "cachedResultName": "catalog"
+        },
+        "table": {
+          "__rl": true,
+          "value": "available_product_catalog",
+          "mode": "list",
+          "cachedResultName": "available_product_catalog"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        -32,
+        -256
+      ],
+      "id": "4e16dac6-b78b-45cf-8ad2-213e6c99aecc",
+      "name": "productosDisponibles",
+      "credentials": {
+        "postgres": {
+          "id": "gJnhaqeZETxFLnvw",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const src = (items[0].json.output || '').toString();\nconst MAX = 3800; // un poco menos por etiquetas <pre>\n\nfunction chunkByNewline(text, size) {\n  const parts = [];\n  let start = 0;\n  while (start < text.length) {\n    let end = Math.min(start + size, text.length);\n    if (end < text.length) {\n      const cut = text.lastIndexOf('\\n', end);\n      if (cut > start + Math.floor(size * 0.5)) end = cut;\n    }\n    parts.push(text.slice(start, end).trim());\n    start = end;\n  }\n  return parts.filter(p => p.length > 0);\n}\n\nreturn chunkByNewline(src, MAX).map(t => ({\n  json: { text: `${t}` }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        128,
+        -512
+      ],
+      "id": "9053d7a6-3de7-48e8-803a-e3e4c6f3e869",
+      "name": "Code in JavaScript"
     }
   ],
   "pinData": {},
@@ -1093,7 +1140,7 @@
       "main": [
         [
           {
-            "node": "Send a text message",
+            "node": "Code in JavaScript",
             "type": "main",
             "index": 0
           }
@@ -1320,13 +1367,35 @@
           }
         ]
       ]
+    },
+    "productosDisponibles": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "1a4157bf-0dfd-474f-a599-5f2a9b059cbc",
+  "versionId": "11f4a5a6-5c25-43fd-8273-6ac2bcfcef8a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "f36c64b13bbb7748bd9d1fa29e9a2d15f3b8329608b51a4e86db824070316d3e"

@@ -101,4 +101,5 @@ SELECT
 FROM catalog.products p
 JOIN catalog.product_kinds pk ON pk.id = p.product_kind_id
 JOIN catalog.sale_types st ON st.id = p.sale_type_id
-WHERE p.available = TRUE;
+WHERE p.available = TRUE AND pk.code != 'SERVICE'
+ORDER BY pk.id, p.name;

@@ -1,0 +1,2 @@
+# Ignore JetBrains IDE project files (IntelliJ, PhpStorm, WebStorm, etc.)
+.idea/
