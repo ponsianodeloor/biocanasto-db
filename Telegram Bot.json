@@ -32,8 +32,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        256,
-        -800
+        224,
+        -1296
       ],
       "typeVersion": 1,
       "id": "d013db55-eb9e-4740-bf0f-2a59342afe10",
@@ -91,6 +91,30 @@
               },
               "renameOutput": true,
               "outputKey": "hola"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5df9ac9d-c6e1-4929-9e43-7363443652bf",
+                    "leftValue": "={{ ($('Telegram Trigger').item.json.message?.text || '').toString().trim().toLowerCase() }}",
+                    "rightValue": "^ver productos( disponibles)?$",
+                    "operator": {
+                      "type": "string",
+                      "operation": "regex"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ver productos"
             },
             {
               "conditions": {
@@ -166,8 +190,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        352,
-        -752
+        320,
+        -1248
       ],
       "id": "db9ecaac-0366-498e-91e4-0a6e41ae8062",
       "name": "reply /start",
@@ -1034,6 +1058,51 @@
       ],
       "id": "9053d7a6-3de7-48e8-803a-e3e4c6f3e869",
       "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "sendChatAction",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -928,
+        -752
+      ],
+      "id": "60b9b359-09b3-4e3b-925e-35a3bb979657",
+      "name": "writing Ver Productos",
+      "webhookId": "f70c97b8-cd1b-435c-a758-95942c3f6fad",
+      "credentials": {
+        "telegramApi": {
+          "id": "BfqQ4o55g82POQgF",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "Tenemos estos productos disponibles: Verduras Frutas",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        336,
+        -736
+      ],
+      "id": "89a79047-ca45-4291-9308-9acfb87d739f",
+      "name": "reply / ver productos",
+      "webhookId": "65b431c4-1ab6-442e-aee8-2bca6e55008c",
+      "credentials": {
+        "telegramApi": {
+          "id": "BfqQ4o55g82POQgF",
+          "name": "Telegram account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1061,6 +1130,13 @@
         [
           {
             "node": "reply /start",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "writing Ver Productos",
             "type": "main",
             "index": 0
           }
@@ -1389,13 +1465,35 @@
           }
         ]
       ]
+    },
+    "writing Ver Productos": {
+      "main": [
+        [
+          {
+            "node": "reply / ver productos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "reply / ver productos": {
+      "main": [
+        [
+          {
+            "node": "Call chat.save_bot_response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "11f4a5a6-5c25-43fd-8273-6ac2bcfcef8a",
+  "versionId": "6ecd8fba-fcdc-45e5-be64-bf5755fd067a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "f36c64b13bbb7748bd9d1fa29e9a2d15f3b8329608b51a4e86db824070316d3e"
